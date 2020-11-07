@@ -8,6 +8,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
+import Typography from "@material-ui/core/Typography"
 
 import Header from "./header"
 import "./layout.css"
@@ -34,12 +35,16 @@ const Layout = ({ children }) => {
         }}
       >
         <main>{children}</main>
-        <footer style={{
-          marginTop: `2rem`
-        }}>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.com">Gatsby</a>
+        <footer
+          style={{
+            marginTop: `4rem`,
+          }}
+        >
+          <Typography variant="h6" align="center" gutterBottom>
+            © {new Date().getFullYear()}, Built with
+            {` `}
+            <a href="https://www.gatsbyjs.com">Gatsby</a>
+          </Typography>
         </footer>
       </div>
     </>

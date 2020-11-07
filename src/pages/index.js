@@ -1,22 +1,72 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Link } from "gatsby"
+import axios from "axios"
+
+import Container from "@material-ui/core/Container"
+import Typography from "@material-ui/core/Typography"
+import Grid from "@material-ui/core/Grid"
+import Button from "@material-ui/core/Button"
+import "./index.css"
 
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link> <br />
-    <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
-  </Layout>
-)
+const IndexPage = () => {
+  const [events, setEvents] = useState(null)
+
+  useEffect(() => {
+    axios.get("http://localhost:1337/events/1").then(json => {
+      setEvents(json.data)
+      console.log(json.data)
+    })
+  }, [])
+
+  const img = events ? events.Images.formats.medium.url : null
+
+  return (
+    <Layout>
+      <SEO title="Event Name" />
+      <div className="mainContainer">
+        <Container maxWidth="lg">
+          <Typography
+            component="h1"
+            variant="h3"
+            align="center"
+            color="textPrimary"
+            gutterBottom
+          >
+            {events ? events.Name : null}
+          </Typography>
+          <Grid container spacing={2} justify="center" className="ctaButton">
+            <img src={`http://localhost:1337` + img} />
+          </Grid>
+          <Typography variant="h6" align="left" color="textSecondary" paragraph>
+            {events ? events.Description : null}
+          </Typography>
+          <div>
+            <Grid container spacing={2} justify="center" className="ctaButton">
+              <Button
+                variant="contained"
+                color="secondary"
+                size="large"
+                style={{ width: "300px", height: "60px" }}
+              >
+                <Link
+                  to="/signmeup/"
+                  style={{
+                    color: `white`,
+                    textDecoration: `none`,
+                  }}
+                >
+                  Sign Me Up
+                </Link>
+              </Button>
+            </Grid>
+          </div>
+        </Container>
+      </div>
+    </Layout>
+  )
+}
 
 export default IndexPage
