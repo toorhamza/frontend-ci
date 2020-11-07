@@ -6,16 +6,6 @@ module.exports = {
   },
   plugins: [
     {
-      resolve: 'gatsby-source-strapi',
-      options: {
-        apiURL: 'http://localhost:1337',
-        singleTypes: [ // List of the Content Types you want to be able to request from Gatsby.
-          'events',          
-        ],
-        queryLimit: 1000,
-      },
-    },
-    {
       resolve: `gatsby-theme-material-ui`,
       options: {
         webFontsConfig: {
