@@ -52,7 +52,7 @@ const SignMeUp = () => {
 
   return (
     <Layout>
-      <SEO title="Event Registration" />
+      <SEO title="Event Registrationnnn" />
       <div className="mainContainer">
         <Container maxWidth="lg">
           <Typography
